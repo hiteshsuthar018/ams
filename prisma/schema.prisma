@@ -1,0 +1,51 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  TRAINEE
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  role      Role
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  attendance Attendance[]
+
+  isActive   Boolean @default(true)
+}
+
+model Attendance {
+  id        String   @id @default(uuid())
+  userId    String
+  date      DateTime
+  checkIn   DateTime
+  ipAddress String
+
+  user      User @relation(fields: [userId], references: [id])
+
+  @@unique([userId, date])
+}
+
+model AllowedIP {
+  id        String @id @default(uuid())
+  ipAddress String @unique
+  location  String
+}
+
+model PasswordResetToken {
+  id        String   @id @default(uuid())
+  email     String
+  token     String   @unique
+  expiresAt DateTime
+}
