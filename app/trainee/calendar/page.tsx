@@ -77,7 +77,7 @@ export default function CalendarPage(){
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
             {/* Calendar */}
-            <div className="lg:col-span-2 bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+            <div className="lg:col-span-2 bg-white text-black rounded-lg shadow-sm border border-gray-200 p-6">
 
               <style jsx global>{`
                 .react-calendar {
